@@ -3,13 +3,16 @@ import React, { useEffect, useState } from "react";
 function App() {
   const baseUrl = "http://localhost:1337";
   const [projects, setProjects] = useState([]);
-  const [selectValue, setSelectValue] = useState("");
+  const [technologies, setTechnologies] = useState([]);
+  const [selectValue, setSelectValue] = useState("0");
+  const [originalData, setOriginalData] = useState([]);
 
   async function getProjects() {
     const request = await fetch(
       baseUrl + "/api/projects?populate=technologies&populate=cover"
     );
     const response = await request.json();
+    setOriginalData(response.data);
     setProjects(response.data);
   }
 
@@ -17,29 +20,37 @@ function App() {
     getProjects();
   }, []);
 
-  // Extraire toutes les technologies (name) depuis tous les projets
-  const allTechnologies = projects
-    .flatMap((project) => project.technologies || [])
-    .map((tech) => tech.name);
+  async function getTechnologies() {
+    const request = await fetch(baseUrl + "/api/technologies");
+    const response = await request.json();
+    setTechnologies(response.data);
+  }
 
-  const technologies = [...new Set(allTechnologies)];
+  useEffect(() => {
+    getTechnologies();
+  }, []);
 
-  // Filtrer les projets par technologie sélectionnée
-  const filteredProjects = selectValue
-    ? projects.filter((project) =>
-        project.technologies?.some((tech) => tech.name === selectValue)
-      )
-    : projects;
+  useEffect(() => {
+    var data = [...originalData];
+    if (selectValue == "0") {
+      setProjects(data);
+    } else {
+      data = data.filter((project) =>
+        project.technologies.some((technology) => technology.id == selectValue)
+      );
+      setProjects(data);
+    }
+  }, [selectValue]);
 
   return (
     <div className="container">
       <h1>Mes projets</h1>
 
       <select onChange={(e) => setSelectValue(e.target.value)}>
-        <option value="">Sélectionner une technologie</option>
-        {technologies.map((technology, index) => (
-          <option key={index} value={technology}>
-            {technology}
+        <option value="0">Sélectionner une technologie</option>
+        {technologies.map((technology) => (
+          <option key={technology.id} value={technology.id}>
+            {technology.name}
           </option>
         ))}
       </select>
@@ -53,8 +64,8 @@ function App() {
           marginTop: "20px",
         }}
       >
-        {filteredProjects.map((project) => {
-          const { id, title, description, link, cover, technologies } = project;
+        {projects.map((project) => {
+          const { id, title, description, link, cover } = project;
           const imageUrl = cover?.url;
 
           return (
@@ -80,14 +91,21 @@ function App() {
                   }}
                 />
               )}
-              <div className="badges">
-                {technologies.map((tech) => (
-                  <span className="badge" key={tech.id}>
-                    {tech.name}
+              <div className="badges" style={{ textAlign: "center" }}>
+                {project.technologies.map((technology) => (
+                  <span className="badge" key={technology.id}>
+                    {technology.name}
                   </span>
                 ))}
               </div>
-              <h2 style={{ fontSize: "18px", marginTop: "10px" }}>{title}</h2>
+              <h2
+                style={{
+                  fontSize: "18px",
+                  marginTop: "10px",
+                }}
+              >
+                {title}
+              </h2>
               <p style={{ fontSize: "14px", color: "#fff" }}>{description}</p>
               <a
                 href={link}
@@ -98,6 +116,8 @@ function App() {
                   marginTop: "10px",
                   color: "#007BFF",
                   textDecoration: "none",
+                  paddingInline: "40%",
+                  width: "200px",
                 }}
               >
                 Voir le projet
