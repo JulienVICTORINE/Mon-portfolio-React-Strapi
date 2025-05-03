@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ContactForm from "./ContactForm";
 
 function App() {
   const baseUrl = "http://localhost:1337";
@@ -7,6 +8,7 @@ function App() {
   const [selectValue, setSelectValue] = useState("0");
   const [originalData, setOriginalData] = useState([]);
 
+  // Récupère tous les projets
   async function getProjects() {
     const request = await fetch(
       baseUrl + "/api/projects?populate=technologies&populate=cover"
@@ -20,6 +22,7 @@ function App() {
     getProjects();
   }, []);
 
+  // Récupère toutes les technologies
   async function getTechnologies() {
     const request = await fetch(baseUrl + "/api/technologies");
     const response = await request.json();
@@ -30,6 +33,7 @@ function App() {
     getTechnologies();
   }, []);
 
+  // Filtrer les projets en fonction de la technologie choisie
   useEffect(() => {
     var data = [...originalData];
     if (selectValue == "0") {
@@ -126,6 +130,8 @@ function App() {
           );
         })}
       </div>
+
+      <ContactForm />
     </div>
   );
 }
