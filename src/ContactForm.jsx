@@ -135,10 +135,8 @@ export default function ContactForm() {
       ref={form}
     >
       <h2>Contactez-moi</h2>
-
       {status.error && <p style={{ color: "red" }}>{status.error}</p>}
       {status.success && <p style={{ color: "green" }}>{status.success}</p>}
-
       <div>
         <label htmlFor="name">Nom : </label>
         <input
@@ -150,7 +148,6 @@ export default function ContactForm() {
           style={{ padding: "14px", width: "100%", margin: "10px 0" }}
         />
       </div>
-
       <div>
         <label htmlFor="email">Email : </label>
         <input
@@ -162,7 +159,6 @@ export default function ContactForm() {
           style={{ padding: "14px", width: "100%", margin: "10px 0" }}
         />
       </div>
-
       <div>
         <label htmlFor="subject">Objet : </label>
         <input
@@ -174,7 +170,6 @@ export default function ContactForm() {
           style={{ padding: "14px", width: "100%", margin: "10px 0" }}
         />
       </div>
-
       <div>
         <label htmlFor="message">Message : </label>
         <textarea
@@ -186,8 +181,21 @@ export default function ContactForm() {
           style={{ padding: "14px", width: "100%", margin: "10px 0" }}
         />
       </div>
-
-      <button type="submit">Envoyer</button>
+      <div style={{ textAlign: "center" }}>
+        <button
+          type="submit"
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#007BFF",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Envoyer
+        </button>
+      </div>{" "}
     </form>
   );
 }
