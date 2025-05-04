@@ -36,13 +36,13 @@ This combination allows for both instant communication and persistent data stora
 📁 docs/ # Auto-generated documentation (JSDoc)
 📁 public/
 📁 src/
-├── App.jsx         	# Main component
-├── ContactForm.jsx 	# React component for the contact form
+├── App.jsx         	    # Main component
+├── ContactForm.jsx 	    # React component for the contact form
 └── ...
-📄 jsdoc.json 				# JSDoc configuration
-📄 jsdoc.conf.json		# A tool that automatically generates HTML documentation
-📄 .env 						  # Environment variables for EmailJS
-📁 strapi/ 						# Strapi backend project (optional)
+📄 jsdoc.json 				    # JSDoc configuration
+📄 jsdoc.conf.json		    # A tool that automatically generates HTML documentation
+📄 .env 						      # Environment variables for EmailJS
+📁 strapi/ 						    # Strapi backend project (optional)
 ```
 ---
 
