@@ -5,7 +5,7 @@
 ## 📝 1. Project Description
 
 This project is a personal portfolio built with **React.js** on the frontend and **Strapi** on the backend.
-It displays a list of projects dynamically retrieved from a Strapi API, filterable by technology, and includes a functional **contact form** that :
+It displays a list of projects dynamically retrieved from a Strapi API, filterable by technology, and includes a functional **contact form** that:
 
 - Stores messages in Strapi
 - Sends an email via **EmailJS**
