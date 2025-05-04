@@ -172,12 +172,15 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  display: "inline-block",
-                  marginTop: "10px",
+                  display: "block",
+                  margin: "10px auto 0", // top 10px, horizontal auto = centré
                   color: "#007BFF",
                   textDecoration: "none",
-                  paddingInline: "40%",
-                  width: "200px",
+                  textAlign: "center",
+                  width: "150px",
+                  padding: "8px 16px",
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "6px",
                 }}
               >
                 Voir le projet

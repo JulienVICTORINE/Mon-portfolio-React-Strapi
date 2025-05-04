@@ -79,27 +79,22 @@ export default function ContactForm() {
       return;
     }
 
-    // const data = JSON.stringify({
-    //   data: {
-    //     ...formData,
-    //     datecreation: new Date().toISOString(),
-    //   },
-    // });
+    const data = JSON.stringify({
+      data: {
+        ...formData,
+        datecreation: new Date().toISOString(),
+      },
+    });
 
     try {
       // Send to Strapi
       await fetch(`${baseUrl}/api/contacts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          data: {
-            ...formData,
-            datecreation: new Date().toISOString(),
-          },
-        }),
+        body: data,
       });
 
-      console.log(data);
+      console.log("data enregistrées", data);
 
       // Send email via EmailJS
       await emailjs
@@ -126,7 +121,10 @@ export default function ContactForm() {
       });
       formElement.reset();
     } catch (error) {
-      setStatus({ error: err.message || "An error occurred.", success: null });
+      setStatus({
+        error: error.message || "An error occurred.",
+        success: null,
+      });
     }
   };
 
@@ -146,7 +144,7 @@ export default function ContactForm() {
         <input
           type="text"
           name="name"
-          placeholder="Nom"
+          placeholder="Name"
           value={formData.name}
           onChange={handleChange}
           style={{ padding: "14px", width: "100%", margin: "10px 0" }}
