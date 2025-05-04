@@ -59,22 +59,68 @@ Key components :
 
 ---
 
-## 3. Technologies used
+## ⚙️ 3. Technologies used
 
-| Layer             | Technologie      | Rôle / Description                                                    |
-|-------------------| ---------------- | --------------------------------------------------------------------- |
-| Frontend UI       | **React**        | Bibliothèque JavaScript pour construire l’interface utilisateur       |
-		    | **CSS**          | Mise en forme manuelle avec fichiers en CSS                           |
-|-------------------| ---------------- | --------------------------------------------------------------------- |
-| Contact Workflow  | **EmailJS**      | Service d’envoi d’emails côté client sans serveur SMTP                |
-|-------------------| ---------------- | --------------------------------------------------------------------- |
-| Backend CMS       | **Strapi**       | CMS headless utilisé comme backend pour gérer les projets et contacts |
-                    | **Node.js**      | Runtime JavaScript utilisé par Vite et pour exécuter Strapi           |
-                    | **SQLite**       | Base de données par défaut de Strapi                                  |
-|-------------------| ---------------- | --------------------------------------------------------------------- |
-| Documentation     | **JSDoc**        | Générateur de documentation à partir des commentaires du code         |
-|-------------------| ---------------- | --------------------------------------------------------------------- |
-| Build Tool        | **Vite**         | Outil de build ultra rapide pour le développement React               |
+| Layer             | Technology        | Part / Description                                                     |
+|-------------------|------------------ |------------------------------------------------------------------------|
+| Frontend UI       | **React**         | JavaScript library for building the user interface                     |
+| Frontend UI       | **CSS**           | Manual formatting with CSS files                                       |
+| Contact Workflow  | **EmailJS**       | Client-side email sending service without SMTP server                  |
+| Backend CMS       | **Strapi**        | Headless CMS used as a backend to manage projects and contacts         |
+| Backend CMS       | **Node.js**       | JavaScript runtime used by Vite and to run Strapi                      |
+| Backend CMS       | **SQLite**        | Strapi default database                                                |
+| Documentation     | **JSDoc**         | Documentation generator form code comments                             |
+| Build Tool        | **Vite**          | Ultra-fast build tool for React development                            |
 
+---
 
+## 🚀 4. Installation Guide
+
+### ✅ Prerequisites
+
+- Node.js ≥ 18.x
+- npm ≥ 9.x
+- EmailJS account → [https://www.emailjs.com](https://www.emailjs.com)
+- (Optional) Strapi CLI: `npm install -g create-strapi-app`
+
+---
+
+### 🧪 Frontend setup
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/JulienVICTORINE/Mon-portfolio-React-Strapi
+
+# 2. Move into the folder
+cd your-portfolio
+
+# Install dependencies
+npm install
+
+🔐 EmailJS environment variables
+Create a .env file at the root:
+
+VITE_EMAILJS_SERVICE_ID=#######
+VITE_EMAILJS_TEMPLATE_ID=#######
+VITE_EMAILJS_PUBLIC_KEY=#######
+
+# 3. Launch the frontend
+npm run dev
+
+The application will be available at http://localhost:5173
+```
+
+### 🧪 Backend setup
+
+🗂️ Strapi setup (optional backend)
+If using Strapi for data storage:
+
+# Create your Strapi backend (if not already done)
+```bash
+cd strapi/
+npm install
+npm run dev
+```
+
+---
 
