@@ -5,7 +5,7 @@
 ## 📝 1. Project Description
 
 This project is a personal portfolio built with **React.js** on the frontend and **Strapi** on the backend.
-It displays a list of projects dynamically retrieved from a Strapi API, filterable by technology, and includes a functional **contact form** that:
+It displays a list of projects dynamically retrieved from a Strapi API, filterable by technology, and includes a functional **contact form** that :
 
 - Stores messages in Strapi
 - Sends an email via **EmailJS**
@@ -54,8 +54,8 @@ This combination allows for both instant communication and persistent data stora
 3. Displays success/error feedback to the user
 
 Key components :
-- [`App.jsx`] : Retrieves and displays projects with filters by technology.
-- [`ContactForm.jsx`] : Manages form submission to Strapi and EmailJS.
+- `App.jsx` : Retrieves and displays projects with filters by technology.
+- `ContactForm.jsx` : Manages form submission to Strapi and EmailJS.
 
 ---
 
@@ -131,7 +131,7 @@ By default, Strapi runs on http://localhost:1337
 **Backend (Strapi)**
 - Host on: Render, Railway, VPS, DigitalOcean App Platform, etc.
 - Define the necessary environment variables.
-- Don't forget to configure public permissions for [`GET /api/projects`] and [`GET /api/technologies`].
+- Don't forget to configure public permissions for `GET /api/projects` and `GET /api/technologies`.
 - Ensure that permissions for the contact collection type are enabled.
 - Configure CORS to allow requests from your frontend domain.
 
