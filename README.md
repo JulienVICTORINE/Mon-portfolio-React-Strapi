@@ -64,12 +64,16 @@ Key components :
 | Layer             | Technologie      | Rôle / Description                                                    |
 |-------------------| ---------------- | --------------------------------------------------------------------- |
 | Frontend UI       | **React**        | Bibliothèque JavaScript pour construire l’interface utilisateur       |
-		                | **CSS (custom)** | Mise en forme manuelle avec fichiers en CSS                           |
+		    | **CSS**          | Mise en forme manuelle avec fichiers en CSS                           |
+|-------------------| ---------------- | --------------------------------------------------------------------- |
 | Contact Workflow  | **EmailJS**      | Service d’envoi d’emails côté client sans serveur SMTP                |
+|-------------------| ---------------- | --------------------------------------------------------------------- |
 | Backend CMS       | **Strapi**       | CMS headless utilisé comme backend pour gérer les projets et contacts |
                     | **Node.js**      | Runtime JavaScript utilisé par Vite et pour exécuter Strapi           |
                     | **SQLite**       | Base de données par défaut de Strapi                                  |
+|-------------------| ---------------- | --------------------------------------------------------------------- |
 | Documentation     | **JSDoc**        | Générateur de documentation à partir des commentaires du code         |
+|-------------------| ---------------- | --------------------------------------------------------------------- |
 | Build Tool        | **Vite**         | Outil de build ultra rapide pour le développement React               |
 
 
