@@ -106,14 +106,19 @@ function App() {
     <div className="container">
       <h1>Mes projets</h1>
 
-      <select onChange={(e) => setSelectValue(e.target.value)}>
-        <option value="0">Sélectionner une technologie</option>
-        {technologies.map((technology) => (
-          <option key={technology.id} value={technology.id}>
-            {technology.name}
-          </option>
-        ))}
-      </select>
+      <div className="tech-filter-container">
+        <select
+          onChange={(e) => setSelectValue(e.target.value)}
+          className="tech-filter-select"
+        >
+          <option value="0">Sélectionner une technologie</option>
+          {technologies.map((technology) => (
+            <option key={technology.id} value={technology.id}>
+              {technology.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div
         className="card-container"

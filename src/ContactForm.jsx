@@ -134,7 +134,7 @@ export default function ContactForm() {
       style={{ maxWidth: 600, margin: "auto" }}
       ref={form}
     >
-      <h2>Contactez-moi</h2>
+      <h2 style={{ textAlign: "center" }}>Contactez-moi</h2>
       {status.error && <p style={{ color: "red" }}>{status.error}</p>}
       {status.success && <p style={{ color: "green" }}>{status.success}</p>}
       <div>

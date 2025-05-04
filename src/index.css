@@ -38,6 +38,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  text-align: center;
 }
 
 button {
@@ -60,16 +61,18 @@ button:focus-visible {
 }
 
 .badges {
-  margin: 10px 0;
+  /* margin: 10px 0; */
+  text-align: center;
+  margin-top: 10px;
 }
 
 .badge {
   display: inline-block;
   background-color: #007bff;
   color: white;
-  padding: 4px 8px;
-  margin: 2px;
-  border-radius: 4px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 5px;
   font-size: 12px;
 }
 
@@ -88,4 +91,17 @@ select {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Centrage du select */
+.tech-filter-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.tech-filter-select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 250px;
 }
