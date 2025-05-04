@@ -185,3 +185,5 @@ La commande permettant de générer une documentation JSDoc dans un dossier [`do
 ```bash
 npm run docs
 ```
+
+![Contenu contactForm](./img/capture-contactForm-mon-portfolio.png)
