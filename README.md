@@ -120,6 +120,8 @@ If using Strapi for data storage :
 cd strapi/
 npm install
 npm run dev
+
+By default, Strapi runs on http://localhost:1337
 ```
 
 ---
