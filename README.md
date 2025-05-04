@@ -1,6 +1,6 @@
 ![Carte projets](./img/capture-exercice-Mon-portfolio.png)
 
-# 🎨 React Portfolio with Strapi Backend
+# 🎨 Portfolio with Strapi Backend & ReactJS
 
 ## 📝 1. Project Description
 
