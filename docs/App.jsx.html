@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>App.jsx</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css" />
+    <link type="text/css" rel="stylesheet" href="" />
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
+
+  <body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+
+    <div class="top-nav">
+      <div class="inner">
+        <a
+          id="hamburger"
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+          <a href="index.html">
+            <h1 class="navbar-item">My React components</h1>
+          </a>
+        </div>
+        <div class="menu">
+          <div class="navigation">
+            <a href="index.html" class="link"> Documentation </a>
+            <a href="App.jsx.html" class="link"> App </a>
+            <a href="ContactForm.jsx.html" class="link"> ContactForm </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="main">
+      <div class="sidebar" id="sidebarNav">
+        <nav>
+          <h2><a href="index.html">Documentation</a></h2>
+          <div class="category"></div>
+          <h2><a href="App.jsx.html">App</a></h2>
+          <div class="category"></div>
+          <h2><a href="ContactForm.jsx.html">ContactForm</a></h2>
+          <div class="category"></div>
+        </nav>
+      </div>
+      <div class="core" id="main-content-wrapper">
+        <div class="content">
+          <header class="page-title">
+            <p>Source</p>
+            <h1>App.jsx</h1>
+          </header>
+
+          <section>
+            <article>
+              <pre class="prettyprint source linenums"><code>/**
+ * Main application component. Displays a list of projects with a filter by technology and a contact form.
+ *
+ * @component
+ * @returns {JSX.Element} App root component
+ */
+
+import React, { useEffect, useState } from "react";
+import ContactForm from "./ContactForm";
+
+function App() {
+  const baseUrl = "http://localhost:1337";
+
+  /**
+   * List of all fetched projects from Strapi.
+   * @type {Array}
+   */
+  const [projects, setProjects] = useState([]);
+
+  /**
+   * List of all technologies from Strapi.
+   * @type {Array}
+   */
+  const [technologies, setTechnologies] = useState([]);
+
+  /**
+   * Selected technology filter value (id as string).
+   */
+  const [selectValue, setSelectValue] = useState("0");
+
+  /**
+   * Stores the unfiltered list of projects.
+   * @type {Array}
+   */
+  const [originalData, setOriginalData] = useState([]);
+
+  /**
+   * Fetches all projects with related technologies and cover images from the Strapi API.
+   * Updates both `originalData` and `projects` state.
+   *
+   * @async
+   * @function
+   * @returns {Promise&lt;void>}
+   */
+
+  // Récupère tous les projets
+  async function getProjects() {
+    const request = await fetch(
+      baseUrl + "/api/projects?populate=technologies&amp;populate=cover"
+    );
+    const response = await request.json();
+    setOriginalData(response.data);
+    setProjects(response.data);
+  }
+
+  /**
+   * useEffect that triggers on mount to fetch projects from Strapi.
+   */
+
+  useEffect(() => {
+    getProjects();
+  }, []);
+
+  /**
+   * Fetches all technologies from the Strapi API.
+   *
+   * @async
+   * @function
+   * @returns {Promise&lt;void>}
+   */
+
+  // Récupère toutes les technologies
+  async function getTechnologies() {
+    const request = await fetch(baseUrl + "/api/technologies");
+    const response = await request.json();
+    setTechnologies(response.data);
+  }
+
+  /**
+   * On component mount, fetch the technologies.
+   */
+
+  useEffect(() => {
+    getTechnologies();
+  }, []);
+
+  /**
+   * Filters the projects by selected technology whenever `selectValue` changes.
+   * If "0" is selected, shows all projects.
+   */
+
+  // Filtrer les projets en fonction de la technologie choisie
+  useEffect(() => {
+    var data = [...originalData];
+    if (selectValue == "0") {
+      setProjects(data);
+    } else {
+      data = data.filter((project) =>
+        project.technologies.some((technology) => technology.id == selectValue)
+      );
+      setProjects(data);
+    }
+  }, [selectValue]);
+
+  return (
+    &lt;div className="container">
+      &lt;h1>Mes projets&lt;/h1>
+
+      &lt;select onChange={(e) => setSelectValue(e.target.value)}>
+        &lt;option value="0">Sélectionner une technologie&lt;/option>
+        {technologies.map((technology) => (
+          &lt;option key={technology.id} value={technology.id}>
+            {technology.name}
+          &lt;/option>
+        ))}
+      &lt;/select>
+
+      &lt;div
+        className="card-container"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gap: "20px",
+          marginTop: "20px",
+        }}
+      >
+        {projects.map((project) => {
+          const { id, title, description, link, cover } = project;
+          const imageUrl = cover?.url;
+
+          return (
+            &lt;div
+              className="card"
+              key={id}
+              style={{
+                border: "1px solid #ddd",
+                borderRadius: "10px",
+                padding: "15px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+              }}
+            >
+              {imageUrl &amp;&amp; (
+                &lt;img
+                  src={baseUrl + imageUrl}
+                  alt={title}
+                  style={{
+                    width: "100%",
+                    height: "180px",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                  }}
+                />
+              )}
+              &lt;div className="badges" style={{ textAlign: "center" }}>
+                {project.technologies.map((technology) => (
+                  &lt;span className="badge" key={technology.id}>
+                    {technology.name}
+                  &lt;/span>
+                ))}
+              &lt;/div>
+              &lt;h2
+                style={{
+                  fontSize: "18px",
+                  marginTop: "10px",
+                }}
+              >
+                {title}
+              &lt;/h2>
+              &lt;p style={{ fontSize: "14px", color: "#fff" }}>{description}&lt;/p>
+              &lt;a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-block",
+                  marginTop: "10px",
+                  color: "#007BFF",
+                  textDecoration: "none",
+                  paddingInline: "40%",
+                  width: "200px",
+                }}
+              >
+                Voir le projet
+              &lt;/a>
+            &lt;/div>
+          );
+        })}
+      &lt;/div>
+
+      &lt;ContactForm />
+    &lt;/div>
+  );
+}
+
+export default App;
+</code></pre>
+            </article>
+          </section>
+        </div>
+
+        <footer class="footer">
+          <div class="content has-text-centered">
+            <p>
+              Documentation generated by
+              <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a>
+            </p>
+            <p class="sidebar-created-by">
+              <a
+                href="https://github.com/SoftwareBrothers/better-docs"
+                target="_blank"
+                >BetterDocs theme</a
+              >
+              provided with <i class="fas fa-heart"></i> by
+              <a href="http://softwarebrothers.co" target="_blank"
+                >SoftwareBrothers - JavaScript Development Agency</a
+              >
+            </p>
+          </div>
+        </footer>
+      </div>
+      <div id="side-nav" class="side-nav"></div>
+    </div>
+    <script src="scripts/app.min.js"></script>
+    <script>
+      PR.prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

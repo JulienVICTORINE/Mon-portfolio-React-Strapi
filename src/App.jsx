@@ -1,12 +1,47 @@
+/**
+ * Main application component. Displays a list of projects with a filter by technology and a contact form.
+ *
+ * @component
+ * @returns {JSX.Element} App root component
+ */
+
 import React, { useEffect, useState } from "react";
 import ContactForm from "./ContactForm";
 
 function App() {
   const baseUrl = "http://localhost:1337";
+
+  /**
+   * List of all fetched projects from Strapi.
+   * @type {Array}
+   */
   const [projects, setProjects] = useState([]);
+
+  /**
+   * List of all technologies from Strapi.
+   * @type {Array}
+   */
   const [technologies, setTechnologies] = useState([]);
+
+  /**
+   * Selected technology filter value (id as string).
+   */
   const [selectValue, setSelectValue] = useState("0");
+
+  /**
+   * Stores the unfiltered list of projects.
+   * @type {Array}
+   */
   const [originalData, setOriginalData] = useState([]);
+
+  /**
+   * Fetches all projects with related technologies and cover images from the Strapi API.
+   * Updates both `originalData` and `projects` state.
+   *
+   * @async
+   * @function
+   * @returns {Promise<void>}
+   */
 
   // Récupère tous les projets
   async function getProjects() {
@@ -18,9 +53,21 @@ function App() {
     setProjects(response.data);
   }
 
+  /**
+   * useEffect that triggers on mount to fetch projects from Strapi.
+   */
+
   useEffect(() => {
     getProjects();
   }, []);
+
+  /**
+   * Fetches all technologies from the Strapi API.
+   *
+   * @async
+   * @function
+   * @returns {Promise<void>}
+   */
 
   // Récupère toutes les technologies
   async function getTechnologies() {
@@ -29,9 +76,18 @@ function App() {
     setTechnologies(response.data);
   }
 
+  /**
+   * On component mount, fetch the technologies.
+   */
+
   useEffect(() => {
     getTechnologies();
   }, []);
+
+  /**
+   * Filters the projects by selected technology whenever `selectValue` changes.
+   * If "0" is selected, shows all projects.
+   */
 
   // Filtrer les projets en fonction de la technologie choisie
   useEffect(() => {
