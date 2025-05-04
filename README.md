@@ -2,7 +2,7 @@
 
 # 🎨 React Portfolio with Strapi Backend
 
-## 📝 Project Description
+## 📝 1. Project Description
 
 This project is a personal portfolio built with **React.js** on the frontend and **Strapi** on the backend.
 It displays a list of projects dynamically retrieved from a Strapi API, filterable by technology, and includes a functional **contact form** that:
@@ -29,5 +29,20 @@ This combination allows for both instant communication and persistent data stora
   - Automatic email notification (via EmailJS)
 - Responsive interface suitable for desktop, tablet, and mobile devices
 
+---
+
+## 🏗️ Architecture technique
+```txt
+📁 docs/ # Auto-generated documentation (JSDoc)
+📁 public/
+📁 src/
+├── App.jsx         			    # Main component
+│   │   ├── ContactForm.jsx 	# React component for the contact form
+│   │   └── ...
+📄 jsdoc.json 					      # JSDoc configuration
+📄 jsdoc.conf.json				    # A tool that automatically generates HTML documentation
+📄 .env 						          # Environment variables for EmailJS
+📁 strapi/ 						        # Strapi backend project (optional)
+```
 ---
 
