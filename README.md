@@ -31,7 +31,7 @@ This combination allows for both instant communication and persistent data stora
 
 ---
 
-## 🏗️ Architecture technique
+## 🏗️ 2. Technical architecture
 ```txt
 📁 docs/ # Auto-generated documentation (JSDoc)
 📁 public/
@@ -44,5 +44,33 @@ This combination allows for both instant communication and persistent data stora
 📄 .env 						      # Environment variables for EmailJS
 📁 strapi/ 						    # Strapi backend project (optional)
 ```
+
+**Data flow:**
+
+1. User submits the contact form
+2. `ContactForm.jsx`:
+   - Sends form data to Strapi: `POST /api/contacts`
+   - Sends an email using `emailjs.sendForm(...)`
+3. Displays success/error feedback to the user
+
+Key components :
+- [`App.jsx`] : Retrieves and displays projects with filters by technology.
+- [`ContactForm.jsx`] : Manages form submission to Strapi and EmailJS.
+
 ---
+
+## 3. Technologies used
+
+| Layer             | Technologie      | Rôle / Description                                                    |
+|-------------------| ---------------- | --------------------------------------------------------------------- |
+| Frontend UI       | **React**        | Bibliothèque JavaScript pour construire l’interface utilisateur       |
+		                | **CSS (custom)** | Mise en forme manuelle avec fichiers en CSS                           |
+| Contact Workflow  | **EmailJS**      | Service d’envoi d’emails côté client sans serveur SMTP                |
+| Backend CMS       | **Strapi**       | CMS headless utilisé comme backend pour gérer les projets et contacts |
+                    | **Node.js**      | Runtime JavaScript utilisé par Vite et pour exécuter Strapi           |
+                    | **SQLite**       | Base de données par défaut de Strapi                                  |
+| Documentation     | **JSDoc**        | Générateur de documentation à partir des commentaires du code         |
+| Build Tool        | **Vite**         | Outil de build ultra rapide pour le développement React               |
+
+
 
