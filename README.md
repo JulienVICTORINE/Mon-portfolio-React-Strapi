@@ -167,7 +167,7 @@ npm run build
 
 🧱 Collection : `contact`
 
-| Champ        | Type          | Required     | Notes                                 |
+| Field        | Type          | Required     | Notes                                 |
 | ------------ | ------------- | ------------ | ------------------------------------- |
 | name         | Text          | ✅          | formData.name                         |
 | email        | Email         | ✅          | formData.email                        |
