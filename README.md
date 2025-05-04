@@ -113,7 +113,7 @@ The application will be available at http://localhost:5173
 ### 🧪 Backend setup
 
 🗂️ Strapi setup (optional backend)
-If using Strapi for data storage:
+If using Strapi for data storage :
 
 # Create your Strapi backend (if not already done)
 ```bash
@@ -124,3 +124,62 @@ npm run dev
 
 ---
 
+## 🌍 5. Deployment Procedure
+
+**Backend (Strapi)**
+- Host on: Render, Railway, VPS, DigitalOcean App Platform, etc.
+- Define the necessary environment variables.
+- Don't forget to configure public permissions for [`GET /api/projects`] and [`GET /api/technologies`].
+- Ensure that permissions for the contact collection type are enabled.
+- Configure CORS to allow requests from your frontend domain.
+
+**Frontend (React)**
+- Build du projet
+```bash
+npm run build
+```
+- Deployment on: Netlify, Vercel, GitHub Pages, etc.
+- Set environment variables (EmailJS keys) in the platform settings
+
+---
+
+## 🗃️ 6. Data structure (Strapi tables)
+
+🧱 Collection : `project`
+
+| Field        | Type      | Relational database                   |
+| ------------ | --------- | ------------------------------------- |
+| title        | Text      | -                                     |
+| description  | Text      | -                                     |
+| link         | Text      | -                                     |
+| cover        | Media     | -                                     |
+| technologies | Relation  | Several `technology` (many-to-many)   |
+
+
+🧱 Collection : `technology`
+
+| Field        | Type     |
+| ------------ | -------- |
+| name         | Text     | 
+
+
+🧱 Collection : `contact`
+
+| Champ        | Type          | Required     | Notes                                 |
+| ------------ | ------------- | ------------ | ------------------------------------- |
+| name         | Text          | ✅          | formData.name                         |
+| email        | Email         | ✅          | formData.email                        |
+| subject      | Text          | ✅          | formData.subject                      |
+| message      | Rich text     | ✅          | formData.message                      |
+| datecreation | DateTime      | ✅          | Generated via JavaScript              |
+
+Make sure to allow the create permission for the Public role in Strapi → Settings → Users & Permissions → Roles.
+
+---
+
+## 📄 Documentation
+
+La commande permettant de générer une documentation JSDoc dans un dossier [`docs/`] : 
+```bash
+npm run docs
+```
