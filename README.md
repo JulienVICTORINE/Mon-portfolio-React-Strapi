@@ -113,7 +113,7 @@ The application will be available at http://localhost:5173
 ### 🧪 Backend setup
 
 🗂️ Strapi setup (optional backend)
-If using Strapi for data storage :
+if using Strapi for data storage :
 
 # Create your Strapi backend (if not already done)
 ```bash
